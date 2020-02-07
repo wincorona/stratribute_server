@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration 
 @EnableAutoConfiguration 
-@EnableTransactionManagement 
+@EnableTransactionManagement
 public class HibernateAutoConfiguration { 
  
 	@Bean 

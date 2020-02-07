@@ -1,3 +1,4 @@
+/*
 package com.siti.tool;
 
 import java.awt.image.BufferedImage;
@@ -29,3 +30,4 @@ public class TwoDimensionCodeImage implements QRCodeImage {
  
 }
 
+*/
