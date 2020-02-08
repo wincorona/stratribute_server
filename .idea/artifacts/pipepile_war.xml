@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="pipepile:war">
+    <output-path>$PROJECT_DIR$/stratribute/target</output-path>
+    <root id="archive" name="pipepile.war">
+      <element id="artifact" artifact-name="pipepile:war exploded" />
+    </root>
+  </artifact>
+</component>
