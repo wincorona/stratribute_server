@@ -1,10 +1,13 @@
 package com.siti.common.shipping.biz;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.siti.common.shipping.mapper.ShippingActionMapper;
 import com.siti.common.shipping.mapper.ShippingNeedMapper;
 import com.siti.common.shipping.po.ShippingAction;
 import com.siti.common.shipping.po.ShippingNeed;
+import com.siti.common.supply.po.ProductionAbility;
 import com.siti.common.util.LocationUtils;
 import com.siti.tool.CommonConstant;
 import com.siti.tool.ReturnResult;
@@ -57,13 +60,15 @@ public class ShippingService {
         }
     }
 
-    public ReturnResult listMyShippingNeed() {
+    public ReturnResult listMyShippingNeed(Integer page,Integer pageSize) {
         ReturnResult rr = new ReturnResult();
+        PageHelper.startPage(page, pageSize);
         Integer userId = 0;
         List<ShippingNeed> MyShippingNeedList = shippingMapper.listMyShippingNeed(userId);
+        PageInfo<ShippingNeed> pageInfo = new PageInfo<>(MyShippingNeedList);
         rr.setCode(CommonConstant.CODE_OK);
         rr.setSuccess(true);
-        rr.setData(MyShippingNeedList);
+        rr.setData(pageInfo);
         return rr;
 
     }
@@ -76,9 +81,11 @@ public class ShippingService {
      * @Param kmLimit    单位千米
      * @Param provinceLimit  省份筛选
      */
-    public ReturnResult findShippingNeed(Double startGpsLong, Double startGpsLat, double kmLimit, String provinceLimit) {
+    public ReturnResult findShippingNeed(Double startGpsLong, Double startGpsLat, double kmLimit, String provinceLimit,Integer page,Integer pageSize) {
         ReturnResult rr = new ReturnResult();
+        PageHelper.startPage(page, pageSize);
         double[] around = LocationUtils.getAround(startGpsLat, startGpsLong, kmLimit);
+
         Double minLat;
         Double maxLat;
         Double minLng;
@@ -97,9 +104,10 @@ public class ShippingService {
                 maxLat,
                 minLng,
                 maxLng, provinceLimit);
+        PageInfo<ShippingNeed> pageInfo = new PageInfo<>(MyShippingNeedList);
         rr.setCode(CommonConstant.CODE_OK);
         rr.setSuccess(true);
-        rr.setData(MyShippingNeedList);
+        rr.setData(pageInfo);
         return rr;
     }
 
@@ -131,22 +139,26 @@ public class ShippingService {
         }
     }
 
-    public ReturnResult getShippingAction(String shippingNeedId) {
+    public ReturnResult getShippingAction(String shippingNeedId,Integer page,Integer pageSize) {
         ReturnResult rr = new ReturnResult();
+        PageHelper.startPage(page, pageSize);
         List<ShippingAction> MyShippingNeedList = shippingActionMapper.getShippingActionByNeedId(shippingNeedId);
+        PageInfo<ShippingAction> pageInfo = new PageInfo<>(MyShippingNeedList);
         rr.setCode(CommonConstant.CODE_OK);
         rr.setSuccess(true);
-        rr.setData(MyShippingNeedList);
+        rr.setData(pageInfo);
         return rr;
     }
 
-    public ReturnResult listShippingAction() {
+    public ReturnResult listShippingAction(Integer page,Integer pageSize) {
         ReturnResult rr = new ReturnResult();
-        Integer userId = 0;
+        PageHelper.startPage(page, pageSize);
+        Integer userId = 0; // TODO 获取userId
         List<ShippingAction> MyShippingNeedList = shippingActionMapper.listShippingAction(userId);
+        PageInfo<ShippingAction> pageInfo = new PageInfo<>(MyShippingNeedList);
         rr.setCode(CommonConstant.CODE_OK);
         rr.setSuccess(true);
-        rr.setData(MyShippingNeedList);
+        rr.setData(pageInfo);
         return rr;
     }
 }

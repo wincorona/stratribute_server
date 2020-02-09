@@ -13,7 +13,10 @@ import java.util.List;
  */
 public interface ShippingActionMapper extends Mapper<ShippingAction> {
 
-    @Select("select * from shipping_action where shipping_need_id = #{shippingNeedId}")
+    @Select("<script>" +
+            "select `id`, `shipping_need_id`, `company`, `name`, `mobile`, `tracking_id`, `user_id` from shipping_action " +
+            "<if test = \"shippingNeedId !=null and shippingNeedId !=''\"> where shipping_need_id = #{shippingNeedId}</if>" +
+            "</script>")
     List<ShippingAction> getShippingActionByNeedId(@Param("shippingNeedId") String shippingNeedId);
 
     @Select("select * from shipping_action where user_id = #{userId}")

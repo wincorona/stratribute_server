@@ -8,7 +8,7 @@ public class ShippingAction {
   private String company;
   private String name;
   private String mobile;
-  private long TrackingId;
+  private long trackingId;
   private long userId;
 
 
@@ -58,13 +58,13 @@ public class ShippingAction {
 
 
   public long getTrackingId() {
-    return TrackingId;
+    return trackingId;
   }
 
-  public void setTrackingId(long TrackingId) {
-    this.TrackingId = TrackingId;
+  public ShippingAction setTrackingId(long trackingId) {
+    this.trackingId = trackingId;
+    return this;
   }
-
 
   public long getUserId() {
     return userId;

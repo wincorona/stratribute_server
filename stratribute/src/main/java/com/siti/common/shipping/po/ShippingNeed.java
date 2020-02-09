@@ -9,8 +9,7 @@ public class ShippingNeed {
   private String senderGpsLong;
   private String senderGpsLat;
   private String receiverGpsLong;
-  private String receiverGps;
-  private String lat;
+  private String receiverGpsLat;
   private String description;
   private long isPellet;
   private long isDelicate;
@@ -86,23 +85,14 @@ public class ShippingNeed {
   }
 
 
-  public String getReceiverGps() {
-    return receiverGps;
+  public String getReceiverGpsLat() {
+    return receiverGpsLat;
   }
 
-  public void setReceiverGps(String receiverGps) {
-    this.receiverGps = receiverGps;
+  public ShippingNeed setReceiverGpsLat(String receiverGpsLat) {
+    this.receiverGpsLat = receiverGpsLat;
+    return this;
   }
-
-
-  public String getLat() {
-    return lat;
-  }
-
-  public void setLat(String lat) {
-    this.lat = lat;
-  }
-
 
   public String getDescription() {
     return description;
