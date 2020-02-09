@@ -1,4 +1,4 @@
-package com.siti.common.shipping.service;
+package com.siti.common.shipping.biz;
 
 
 import com.siti.common.shipping.mapper.ShippingActionMapper;

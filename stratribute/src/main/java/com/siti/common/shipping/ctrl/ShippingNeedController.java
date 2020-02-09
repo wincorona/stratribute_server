@@ -1,8 +1,8 @@
-package com.siti.common.shipping.controller;
+package com.siti.common.shipping.ctrl;
 
 
 import com.siti.common.shipping.po.ShippingNeed;
-import com.siti.common.shipping.service.ShippingService;
+import com.siti.common.shipping.biz.ShippingService;
 import com.siti.tool.ReturnResult;
 import org.springframework.web.bind.annotation.*;
 
