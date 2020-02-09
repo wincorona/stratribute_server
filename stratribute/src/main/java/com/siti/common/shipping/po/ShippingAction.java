@@ -1,8 +1,10 @@
 package com.siti.common.shipping.po;
 
 
-public class ShippingAction {
+import javax.persistence.Id;
 
+public class ShippingAction {
+  @Id
   private long id;
   private long shippingNeedId;
   private String company;

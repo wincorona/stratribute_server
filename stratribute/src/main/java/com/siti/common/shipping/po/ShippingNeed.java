@@ -1,7 +1,10 @@
 package com.siti.common.shipping.po;
 
+import javax.persistence.Id;
+
 public class ShippingNeed {
 
+  @Id
   private String id;
   private long matchId;
   private String senderAddress;

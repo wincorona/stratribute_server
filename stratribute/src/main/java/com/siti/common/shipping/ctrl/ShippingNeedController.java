@@ -3,6 +3,7 @@ package com.siti.common.shipping.ctrl;
 
 import com.siti.common.shipping.po.ShippingNeed;
 import com.siti.common.shipping.biz.ShippingService;
+import com.siti.common.shipping.vo.ScopeInfo;
 import com.siti.tool.ReturnResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,14 +53,11 @@ public class ShippingNeedController {
      * @Param kmLimit 限制距离
      * @Param provinceLimit 限制省份
      * */
-    @GetMapping("find_shipping need")
-    public ReturnResult findShippingNeed(Double startGpsLong,
-                                         Double startGpsLat,
-                                         Double kmLimit,
-                                         String provinceLimit,
+    @GetMapping("find_shipping_need")
+    public ReturnResult findShippingNeed(@RequestBody ScopeInfo scopeInfo,
                                          Integer page,Integer pageSize){
 
-        return shippingService.findShippingNeed(startGpsLong,startGpsLat,kmLimit,provinceLimit,page,pageSize);
+        return shippingService.findShippingNeed(scopeInfo,page,pageSize);
     }
 
 

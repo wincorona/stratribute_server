@@ -7,6 +7,7 @@ import com.siti.common.shipping.mapper.ShippingActionMapper;
 import com.siti.common.shipping.mapper.ShippingNeedMapper;
 import com.siti.common.shipping.po.ShippingAction;
 import com.siti.common.shipping.po.ShippingNeed;
+import com.siti.common.shipping.vo.ScopeInfo;
 import com.siti.common.supply.po.ProductionAbility;
 import com.siti.common.util.LocationUtils;
 import com.siti.tool.CommonConstant;
@@ -48,7 +49,7 @@ public class ShippingService {
 
     public ReturnResult editShippingNeed(ShippingNeed shippingNeed) {
         ReturnResult rr = new ReturnResult();
-        int flag = shippingMapper.updateByPrimaryKey(shippingNeed);
+        int flag = shippingMapper.updateByPrimaryKeySelective(shippingNeed);
         if (flag > 0) {
             rr.setCode(CommonConstant.CODE_OK);
             rr.setSuccess(true);
@@ -81,10 +82,12 @@ public class ShippingService {
      * @Param kmLimit    单位千米
      * @Param provinceLimit  省份筛选
      */
-    public ReturnResult findShippingNeed(Double startGpsLong, Double startGpsLat, double kmLimit, String provinceLimit,Integer page,Integer pageSize) {
+    public ReturnResult findShippingNeed(ScopeInfo scopeInfo, Integer page, Integer pageSize) {
         ReturnResult rr = new ReturnResult();
         PageHelper.startPage(page, pageSize);
-        double[] around = LocationUtils.getAround(startGpsLat, startGpsLong, kmLimit);
+
+        double[] around = LocationUtils.getAround(scopeInfo.getStartGpsLat(),
+                scopeInfo.getStartGpsLong(),scopeInfo.getKmLimit());
 
         Double minLat;
         Double maxLat;
@@ -103,7 +106,7 @@ public class ShippingService {
         List<ShippingNeed> MyShippingNeedList = shippingMapper.findShippingNeed(minLat,
                 maxLat,
                 minLng,
-                maxLng, provinceLimit);
+                maxLng, scopeInfo.getProvinceLimit());
         PageInfo<ShippingNeed> pageInfo = new PageInfo<>(MyShippingNeedList);
         rr.setCode(CommonConstant.CODE_OK);
         rr.setSuccess(true);
@@ -127,7 +130,7 @@ public class ShippingService {
 
     public ReturnResult editShippingAction(ShippingAction shippingAction) {
         ReturnResult rr = new ReturnResult();
-        int flag = shippingActionMapper.updateByPrimaryKey(shippingAction);
+        int flag = shippingActionMapper.updateByPrimaryKeySelective(shippingAction);
         if (flag > 0) {
             rr.setCode(CommonConstant.CODE_OK);
             rr.setSuccess(true);
